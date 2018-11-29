@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom;';
+
 const planets = [
   {
     id: '1',
@@ -5,7 +8,7 @@ const planets = [
     diameter: '3,031.67 mi',
     moons: 'none',
     desc: 'Mercury is the closest planet to the Sun. Due to its proximity, it\'s not easily seen except during twilight. For every two orbits of the Sun, Mercury completes three rotations about its axis. Up until 1965 it was thought that the same side of Mercury constantly faced the Sun.',
-    url: 'img/mercury.jpg' 
+    url: 'img/mercury.jpg'
   },
   {
     id: '2',
@@ -13,7 +16,7 @@ const planets = [
     diameter: '7,521 mi',
     moons: 'none',
     desc: 'Venus is the second planet from the Sun and is the second brightest object in the night sky after the Moon. Venus is the second largest terrestrial planet and is sometimes referred to as the Earth’s sister planet due the their similar size and mass.',
-    url: 'img/venus.jpg' 
+    url: 'img/venus.jpg'
   },
   {
     id: '3',
@@ -21,7 +24,7 @@ const planets = [
     diameter: '7,917.5 mi',
     moons: '1',
     desc: 'Earth is the third planet from the Sun and is the largest of the terrestrial planets. The Earth is the only planet in our solar system not to be named after a Greek or Roman deity. The Earth was formed approximately 4.54 billion years ago and is the only known planet to support life.',
-    url: 'img/earth.jpg' 
+    url: 'img/earth.jpg'
   },
   {
     id: '4',
@@ -37,7 +40,7 @@ const planets = [
     diameter: '86,881.4 mi',
     moons: '79',
     desc: 'The planet Jupiter is the fifth planet out from the Sun, and is two and a half times more massive than all the other planets in the solar system combined. It is made primarily of gases and is therefore known as a "gas giant".',
-    url: 'img/jupiter.jpg' 
+    url: 'img/jupiter.jpg'
   },
   {
     id: '6',
@@ -53,7 +56,7 @@ const planets = [
     diameter: '31,518 mi',
     moons: '27',
     desc: 'Uranus is the seventh planet from the Sun. While being visible to the naked eye, it was not recognised as a planet due to its dimness and slow orbit. Uranus became the first planet discovered with the use of a telescope.',
-    url: 'img/uranus.jpg' 
+    url: 'img/uranus.jpg'
   },
   {
     id: '8',
@@ -61,7 +64,7 @@ const planets = [
     diameter: '30,599 mi',
     moons: '14',
     desc: 'Neptune is the eighth planet from the Sun making it the most distant in the solar system. This gas giant planet may have formed much closer to the Sun in early solar system history before migrating to its present position.',
-    url: 'img/neptune.jpg' 
+    url: 'img/neptune.jpg'
   },
 ];
 
@@ -71,9 +74,44 @@ const planets = [
 
 // 1: Create a 'Planet' component that renders a planet card
 
+const Planet = (props) => {
+  return (
+    <div className="card">
+      <div>
+        <img src= { props.url } alt= { props.name } >
+      </div>
+        <h2> { props.name } </h2>
+        <p> { props.desc } </p>
+        <h3>Planet Profile</h3>
+        <ul>
+          <li><strong>Diameter:</strong> { props.diameter } </li>
+          <li><strong>Moons:</strong> { props.moons } </li>
+        </ul>
+    </div>
+  );
+}
 
-// 2: Create a container component that iterates over the planets array 
-//    and renders a 'Planet' component for each object in the array 
-
+// 2: Create a container component that iterates over the planets array
+//    and renders a 'Planet' component for each object in the array
+const PlanetList = (props) => {
+  return(
+    <div className="container">
+      {props.planet.map( planet =>
+        <Planet
+          key = {planet.id}
+          name = {planet.name}
+          diameter = {planet.diameter}
+          moons = {planet.moons}
+          desc = {planet.desc}
+          url = {planet.url}
+         />
+      )}
+    </div>
+  );
+}
 
 // 3: Render the container component to the DOM
+ReactDOM.render(
+  <PlanetList planets= {planets} />,
+  document.getElementById('root')
+);
